@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(500).body(response);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleNotFound(Exception ex) {
         ApiResponse<Object> response = new ApiResponse<>(
                 "Not Found",
