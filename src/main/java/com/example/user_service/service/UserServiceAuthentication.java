@@ -19,10 +19,12 @@ public class UserServiceAuthentication {
 
     private final UserServiceRepository userServiceRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserServiceAuthentication(UserServiceRepository userServiceRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceAuthentication(UserServiceRepository userServiceRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.passwordEncoder = passwordEncoder;
         this.userServiceRepository = userServiceRepository;
+        this.jwtService = jwtService;
     }
 
     public UserServiceAuthRegestrationResponseDto register(UserServiceAuthRegestrationRequestDto req) {
@@ -63,9 +65,13 @@ public class UserServiceAuthentication {
             throw new BadRequestException("Invalid credentials");
         }
 
+        String token = jwtService.generateToken(userEntity);
+
         UserServiceAuthLoginResponseDto response = new UserServiceAuthLoginResponseDto();
         response.setEmail(userEntity.getEmail());
         response.setUsername(userEntity.getUsername());
+        response.setUserType(userEntity.getUserType());
+        response.setToken(token);
 
         return response;
     }

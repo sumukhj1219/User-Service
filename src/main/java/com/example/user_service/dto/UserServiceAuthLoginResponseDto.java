@@ -10,4 +10,5 @@ public class UserServiceAuthLoginResponseDto {
     private String username;
     private String email;
     private UserType userType;
+    private String token;
 }

@@ -42,4 +42,6 @@ public class UserServiceController {
                 new ApiResponse<>("User logged in", 200, serviceResponse);
         return ResponseEntity.ok(response);
     }
+
+
 }
