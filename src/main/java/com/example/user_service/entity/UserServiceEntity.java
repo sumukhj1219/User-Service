@@ -12,7 +12,7 @@ import java.util.Set;
 public class UserServiceEntity {
     @Id
     @Column(name="user_id")
-    private String Id;
+    private String id;
 
     @Column(name = "username", nullable = false)
     private String username;
