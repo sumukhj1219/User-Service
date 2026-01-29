@@ -54,11 +54,12 @@ public class UserServiceAuthentication {
             throw new NotFoundException("Email not found");
         }
 
-
-
         UserServiceEntity userEntity = userServiceRepository.findByEmail(req.getEmail());
 
-        if (!passwordEncoder.matches(req.getPassword(), userEntity.getPassword())) {
+        if (!passwordEncoder.matches(req.getPassword(), userEntity.getPassword()) ||
+            !userEntity.getEmail().equals(req.getEmail()) ||
+                !userEntity.getUserType().equals(req.getUserType())
+        ) {
             throw new BadRequestException("Invalid credentials");
         }
 
