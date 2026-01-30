@@ -17,7 +17,7 @@ import java.util.Set;
 public class UserServiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -38,7 +38,11 @@ public class UserServiceEntity {
     private UserStatus userStatus;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name="id"))
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     @Column(name = "role")
-    private Set<String> roles = new HashSet<>(Set.of("ROLE_EMPLOYEE"));
+    private Set<Role> roles = new HashSet<>();
 }

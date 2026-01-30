@@ -15,7 +15,7 @@ public class JwtService {
 
     public String generateToken(UserServiceEntity user) {
         return Jwts.builder()
-                .setSubject(user.getId())
+                .setSubject(String.valueOf(user.getId()))
                 .claim("email", user.getEmail())
                 .claim("roles", user.getRoles())
                 .setIssuedAt(new Date())

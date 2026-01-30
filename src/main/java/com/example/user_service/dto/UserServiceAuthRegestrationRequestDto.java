@@ -19,5 +19,7 @@ public class UserServiceAuthRegestrationRequestDto {
     @NotBlank(message = "Password is required")
     private String password;
 
+    private String profilePicture;
+
     private UserType userType;
 }

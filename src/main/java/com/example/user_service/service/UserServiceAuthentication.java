@@ -5,14 +5,13 @@ import com.example.user_service.dto.UserServiceAuthLoginRequestDto;
 import com.example.user_service.dto.UserServiceAuthLoginResponseDto;
 import com.example.user_service.dto.UserServiceAuthRegestrationRequestDto;
 import com.example.user_service.dto.UserServiceAuthRegestrationResponseDto;
+import com.example.user_service.entity.Role;
 import com.example.user_service.entity.UserServiceEntity;
 import com.example.user_service.exception.BadRequestException;
 import com.example.user_service.exception.NotFoundException;
 import com.example.user_service.repository.UserServiceRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceAuthentication {
@@ -37,7 +36,9 @@ public class UserServiceAuthentication {
         userEntity.setEmail(req.getEmail());
         userEntity.setUsername(req.getUsername());
         userEntity.setPassword(passwordEncoder.encode(req.getPassword()));
+        userEntity.getRoles().add(Role.ROLE_EMPLOYEE);
         userEntity.setUserType(req.getUserType());
+        userEntity.setProfilePicture(req.getProfilePicture());
 
         UserServiceEntity newUserEntity = userServiceRepository.save(userEntity);
 
